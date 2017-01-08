@@ -2,24 +2,27 @@ var rig = 'Savanna_801_4_ii'
 var Latest
 var loadValuesTimer
 var loadLatestTimer
+var reloadOverviewTimer
 var viewHeight
 var overView
 var numberOfrows = 500
 var previouslyDisplayedTime
 
 $(window).ready(function () {
-      console.log('(window).ready(function ()')
-    load_Overview(load_Overview_callback)
+      load_Overview(load_Overview_callback)
     viewHeight = window.innerHeight
 });
 
+
+
+
 function load_Overview_callback(Overview){
-    console.log('load_Overview_callback')
     populateHTMLelements(Overview)
     load_latest_(function(){
         loadValuesTimer = setInterval(change_values, 1000);
-        loadLatestTimer = setInterval(nutting, 5000)
-    },15)
+        loadLatestTimer = setInterval(nutting, 15000);
+        reloadOverviewTimer = setInterval(reloadOverview, 60000);
+    },30)
     load_time_span_bar()
 }
 
@@ -33,20 +36,29 @@ function change_values(){
    }
 }
 
+
+
 function nutting(){ /* console.log('nutting')*/
-                  load_latest_(function(){},15)}
+                  load_latest_(function(){},30)}
+
+function reloadOverview() {
+    load_Overview(function(){console.log('reloadOverview CALLBACK')}); console.log('reloadOverview')    
+}
 
 //http://localhost:49614/api/latestVals?table=Savanna_801_4_ii&offset=15
-function load_latest_(success_callback, number) { // imports column names and populates the html elements
+function load_latest_(success_callback, number) { 
         /*  console.log('load_latest_')*/
     var options = {
-        url: "http://roilapi.azurewebsites.net/api/latestVals?table=" + rig + "&offset=" + number,
+        url: "https://roilapi.azurewebsites.net/api/latestVals?table=" + rig + "&offset=" + number,
         type: "GET",
     };
 
     $.ajax(options).success(function (response) {
-        Latest = JSON.parse(response);
-             success_callback(Latest)    
+        if(response){
+                    Latest = JSON.parse(response);
+             success_callback(Latest)  
+        } else { console.log(response)}
+  
     });
 }
 
@@ -55,7 +67,7 @@ function load_latest_(success_callback, number) { // imports column names and po
 
 function load_Overview(success_callback) {
 var options = {
-        url: "http://roilapi.azurewebsites.net/api/Overview?Rigname=" + rig + "&NumberOfRows=" + numberOfrows,
+        url: "https://roilapi.azurewebsites.net/api/Overview?Rigname=" + rig + "&NumberOfRows=" + numberOfrows,
         type: "GET",
     };  
     $.ajax(options).success(function (response) {
