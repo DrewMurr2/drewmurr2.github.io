@@ -7,3 +7,23 @@
   line-height: 1;
 border: double
 }
+
+.incognito {
+    
+    display: none
+}
+
+body .custom-thin-right {
+        width: 30%;
+        float: right;
+        margin-right: 10px;
+     
+    }
+.drewsThinSliderLeft {
+    width: 30%;
+    float: left
+}
+.drewsThinSliderRight {
+    width: 30%;
+    float: Right
+}

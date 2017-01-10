@@ -1,5 +1,4 @@
-var rig = 'Savanna_801_4_ii'
-var Latest
+
 var loadValuesTimer
 var loadLatestTimer
 var reloadOverviewTimer
@@ -8,29 +7,57 @@ var overView
 var numberOfrows = 500
 var previouslyDisplayedTime
 
-$(window).ready(function () {
-      load_Overview(load_Overview_callback)
-    viewHeight = window.innerHeight
-});
 
 
+/*
 
 
+function load_Overview(success_callback) {
+var options = {
+        url: "https://roilapi.azurewebsites.net/api/Overview?Rigname=" + rig + "&NumberOfRows=" + numberOfrows,
+        type: "GET",
+    };  
+    $.ajax(options).success(function (response) {
+        overView = JSON.parse(response);
+             success_callback(overView)    
+    });
+}
+*/
+
+
+/*
 function load_Overview_callback(Overview){
     populateHTMLelements(Overview)
     load_latest_(function(){
         loadValuesTimer = setInterval(change_values, 1000);
         loadLatestTimer = setInterval(nutting, 15000);
         reloadOverviewTimer = setInterval(reloadOverview, 60000);
-    },30)
-    load_time_span_bar()
-}
+    },30);
+    load_time_span_bar();
+ }
+*/
+
+
+
+function load_valuesPage(){
+    populateValuesPageHTMLelements()
+ /*   load_latest_(function(){
+        loadValuesTimer = setInterval(change_values, 1000);
+        loadLatestTimer = setInterval(nutting, 10000);
+        reloadOverviewTimer = setInterval(reloadOverview, 60000);
+    },30);*/
+           loadValuesTimer = setInterval(change_values, 1000);
+    load_time_span_bar(); 
+};
+
+
+
 
 
 function change_values(){
-   for (i=Latest.DateTime.Dates.length - 1;i>=0; i-=1){
-       if(parseJsonDate(Latest.DateTime.Dates[i]) > previouslyDisplayedTime){
-           updateValues(i,Latest)
+   for (i=0;i<overView.Latest.DateTime.Dates.length; i+=1){
+       if(valuesParseJsonDate(overView.Latest.DateTime.Dates[i]) > previouslyDisplayedTime){
+           updateValues(i,overView.Latest)
            return undefined;
        }
    }
@@ -55,8 +82,8 @@ function load_latest_(success_callback, number) {
 
     $.ajax(options).success(function (response) {
         if(response){
-                    Latest = JSON.parse(response);
-             success_callback(Latest)  
+                    overView.Latest = JSON.parse(response);
+             success_callback(overView.Latest)  
         } else { console.log(response)}
   
     });
@@ -65,21 +92,9 @@ function load_latest_(success_callback, number) {
 
 
 
-function load_Overview(success_callback) {
-var options = {
-        url: "https://roilapi.azurewebsites.net/api/Overview?Rigname=" + rig + "&NumberOfRows=" + numberOfrows,
-        type: "GET",
-    };  
-    $.ajax(options).success(function (response) {
-        overView = JSON.parse(response);
-             success_callback(overView)    
-    });
-}
 
 
-
-
-function populateHTMLelements(Overview) {
+function populateValuesPageHTMLelements() {
    var RowOptions = {
           color: [['darkgrey', 'lightgray'],
            ['darkkhaki', 'lightgoldenrodyellow']],
@@ -100,7 +115,7 @@ function populateHTMLelements(Overview) {
         
       
         var htmll = ""
-        Overview.Tracks.forEach(function (track) {
+        overView.Tracks.forEach(function (track) {
 if(track.Name != 'ID'){
            htmll += createRow(track)
            RowOptions.index = (RowOptions.index + 1) % 2;
@@ -109,14 +124,14 @@ if(track.Name != 'ID'){
 
         $('#values_container').html(htmll) 
         
-        updateValues(0,overView)
+        updateValues(overView.DateTime.Dates.length - 1,overView)
 }
 
 
 
 
-function parseJsonDate(jsonDateString) {
-    return new Date(parseInt(jsonDateString.replace('/Date(', ''))+21600000); /*adds 21600000 to correct the timezone - need to implement better solution*/
+function valuesParseJsonDate(jsonDateString) {
+    return new Date(parseInt(jsonDateString.replace('/Date(', '')));  
 }
 
 
@@ -131,7 +146,7 @@ function chopDate(date) {
 
 
 function updateValues(index,object) { // imports the values
-          var thisTime = parseJsonDate(object.DateTime.Dates[index])         
+          var thisTime = valuesParseJsonDate(object.DateTime.Dates[index])         
     if(previouslyDisplayedTime === undefined || thisTime > previouslyDisplayedTime){
         previouslyDisplayedTime = thisTime
     }
@@ -152,7 +167,7 @@ var valheight = viewHeight * 0.7;
     var html5Slider = $('#select_time_slider')[0];
 
     noUiSlider.create(html5Slider, {
-        start: [0],
+        start: [overView.Tracks[0].Values.length- 1],
         orientation: "vertical",
         step: 1,
         range: {

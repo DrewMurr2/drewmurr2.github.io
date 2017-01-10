@@ -3,7 +3,7 @@
 <head>
     <link href="/page/css/noUiSlider/nouislider.min.css" rel="stylesheet">
     <link href="/page/css/bootstrap/bootstrap.min.css" rel="stylesheet">
-  
+      <link href="/page/css/myCSS.css" rel="stylesheet">
 </head>
 
 <body>
@@ -17,80 +17,210 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Roil Services</a>
+                <a class="navbar-brand" id="homepagebutton">Roil Services</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="/page/html/logs.html">Logs<span class="sr-only"></span></a></li>
-                    <li><a href="/page/html/values.html">Values</a></li>
+                    <li class="active"><a id="logsbutton">Logs</a><span class="sr-only"></span></li>
+                    <li><a id="valuesbutton">Values</a></li>
                                    </ul>
-                <form class="navbar-form navbar-left">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search">
-                    </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </form>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Link</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                        </ul>
+                                <ul class="nav navbar-nav navbar-right">
+                    <li id="tracksdropdownmenu" class="dropdown">
+    <!--This is where the tracks drop down goes-->
                     </li>
+                    <li id="optionsdropdownmenu" class="dropdown">
+    <!--This is where the options drop down goes-->
+                        </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
    -
+<!--   ****************************************          HOME PAGE HTML       ************************************* -->
 
+    
+    
+    
+    
+    
+    
+    
+    <!--   ****************************************          VALUES PAGE HTML       ************************************* -->
+    
+    
+     <div id="valuespage" class="incognito">
+     <div class="row"> <!--Row that holds entire contents of body-->
+        <div class="row">
+            <div id="DateTime" class="col-sm-12" style="font-size:xx-large; text-align:center">
 
-<!--    <div class="container">-->
-<!---->            <!-- Trigger the modal with a button -->
-<!---->            <button id="DateTime" type="button" class="btn btn-default btn-lg btn-block" style="margin-bottom:5px; background-color:gainsboro; font-size:x-large  " data-toggle="modal" data-target="#myModal">Open Modal</button>
-<!---->
-<!---->            <!-- Modal -->
-<!---->            <div class="modal fade" id="myModal" role="dialog">
-<!---->                <div class="modal-dialog">
-<!---->
-<!---->                    <!-- Modal content-->
-<!---->                    <div class="modal-content" style="background-color:antiquewhite">
-<!---->                        <div class="modal-header">
-<!---->                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-<!---->                            <h4 class="modal-title">Select Time</h4>
-<!---->                        </div>
-<!---->                        <div class="modal-body">
-<!---->                            <!--Time Slider Goes Here-->
-<!---->                            <div id="select_time_slider" style="background-color:white; ">
-<!---->
-<!---->                            </div>
-<!---->                        </div>
-<!---->                        <div class="modal-footer">
-<!---->                            <button type="button" class="btn btn-default" data-dismiss="modal">Done</button>
-<!---->                            <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color:lawngreen">Live</button>
-<!---->                        </div>
-<!---->                    </div>
-<!---->
-<!---->                </div>
-<!---->            </div>
-<!---->
-  <!---->      </div>
+            </div><!--Element that displays the Date and Time at the Top-->
+        </div><!--Full screen row that displays the Date and Time at the Top-->
+        <div class="row"> <!--Row that holds the slider AND all the values-->
 
+            <div id="track_columns" class="col-sm-11">
+            <div class="container-fluid" id="values_container">
+                    <!--This is the container that holds all the tracks and values-->
+            </div>
+            </div>
+            <div id="slider_column" class="col-sm-1 mySliderColumn"> <!--Column that holds the time slider-->
+            <div  id="select_time_slider"> <!--element that holds the slider-->
+            </div>
+            </div>
 
+        </div>
+    </div> <!--// Body of values-->
+    </div> <!-- End VALUES Page -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!--   ****************************************          LOG PAGE HTML       ************************************* -->
+    
+    <!-- Log Track Modal -->
+    <div class="modal fade" id="TrackPropertiesModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <p>This is a large modal.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+        <!-- View Options Modal -->
+    <div class="modal fade" id="viewOptionsModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">View Options</h4>
+                </div>
+                <div class="modal-body">
+                   <div  class="checkbox">
+      <label><input id="viewTimeAxis" type="checkbox" value="">Time Axis Labels</label>
+    </div>
+    <div class="checkbox">
+      <label><input  id="viewDataSeries" type="checkbox" value="">Data Series Labels</label>
+    </div>
+    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+           <!-- Live Modal -->
+    <div class="modal fade" id="LiveModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="checkbox">
+      <label><input type="checkbox" value="">Option 1</label>
+    </div>
+    <div class="checkbox">
+      <label><input type="checkbox" value="">Option 2</label>
+    </div>
+    <div class="checkbox disabled">
+      <label><input type="checkbox" value="" disabled>Option 3</label>
+    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+<!-- Time Span Modal -->
+<div class="modal fade" id="timeSpanModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog custom-thin-right">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                 <h4 class="modal-title" id="myModalLabel">Time Span</h4>
+            </div>
+            <div class="modal-body">  <div id="time_span_bar" class="drewsThinSliderLeft"><div >Window</div><div id="windowLabel">label</div><div class="content"></div></div>
+              <div id="time_span_bar2" class="drewsThinSliderRight"><div>Location</div><div id="locationLabel">label</div><div class="content"></div></div></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Done</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+    
+    
+    
+    
+    <div id="logpage" class="incognito">
+    <div id="chart_container">
+        <div id="drewschart" style="height:auto; width:auto;">
+            <!-- xXxXxXx CHART xXxXxXx -->
+        </div>
+
+    </div> 
+   
+    </div> <!-- End log page -->
+    
+    
+    
+    
+    
+    
+       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+
+  <script src="/page/javascript/roil/HomeJS.js"></script>
     <script src="/page/javascript/noUiSlider/nouislider.min.js"></script>
     <script src="/page/javascript/noUiSlider/wNumb.js"></script>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/page/javascript/bootstrap/bootstrap.min.js"></script>
-  
+ 
+    <script src="/page/javascript/CanvasJS/canvasjs.min.js"></script>
+       <script src="/page/javascript/roil/ValuesJS.js"></script>
+     <script src="/page/javascript/roil/Logs.js"></script>
 </body>
 
 </html>
