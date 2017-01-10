@@ -37,18 +37,18 @@ var options
 
 if(overView === undefined || overView.CurrentWindow === undefined || overView.CurrentWindow.SetStart === undefined){
 options = {
-        url: "http://roilapi.azurewebsites.net/api/Everything?Rig=" + rig,
+        url: "https://roilapi.azurewebsites.net/api/Everything?Rig=" + rig,
         type: "GET",
     }
 } else {
     if(overView.CurrentWindow.SetEnd === undefined){
      options = {
-        url: "http://roilapi.azurewebsites.net/api/Everything?Rig=" + rig + "&Start=" + overView.CurrentWindow.SetStart,
+        url: "https://roilapi.azurewebsites.net/api/Everything?Rig=" + rig + "&Start=" + overView.CurrentWindow.SetStart,
         type: "GET",
     }   
     }else{
      options = {
-        url: "http://roilapi.azurewebsites.net/api/Everything?Rig=" + rig+ "&Start=" + overView.CurrentWindow.SetStart + "&End=" + overView.CurrentWindow.SetEnd,
+        url: "https://roilapi.azurewebsites.net/api/Everything?Rig=" + rig+ "&Start=" + overView.CurrentWindow.SetStart + "&End=" + overView.CurrentWindow.SetEnd,
         type: "GET",
     }   
     }
