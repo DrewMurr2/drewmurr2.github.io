@@ -1,25 +1,11 @@
 var rig = 'Savanna_801_4_ii'
-var reloadEverythingTimer
+var reloadlatestTimer
 var overView
 var chart
 $(window).ready(function () {
     load_Everything(load_Everything_callback)
     viewHeight = window.innerHeight
 });
-/*
-$('#ValuesLogsToggle').change(function () {
-    if ($(this).prop('checked') === true) {
-        $('#homepage').addClass('incognito')
-        $('#logpage').addClass('incognito')
-        $('#valuespage').removeClass('incognito')
-    }
-    else {
-        $('#homepage').addClass('incognito')
-        $('#valuespage').addClass('incognito')
-        $('#logpage').removeClass('incognito')
-        loadLogsPageMenu()
-    }
-})*/
 $('#ValuesLogsToggle').change(evaluateBothToggles)
 $('#LiveHistoricToggle').change(evaluateBothToggles)
 
@@ -42,10 +28,6 @@ function evaluateBothToggles() {
     }
 }
 
-function changeSpeed(sp) {
-    $(speed).html(sp + 'x')
-}
-
 function openLogsLive() {
     $('#homepage').addClass('incognito')
     $('#valuespage').addClass('incognito')
@@ -55,6 +37,7 @@ function openLogsLive() {
 }
 
 function openLogsHistoric() {
+    clearInterval(reloadlatestTimer)
     $('#homepage').addClass('incognito')
     $('#valuespage').addClass('incognito')
     $('#logpage').removeClass('incognito')
@@ -63,6 +46,9 @@ function openLogsHistoric() {
 }
 
 function openValuesLive() {
+    clearInterval(reloadlatestTimer)
+    loadLatestValues()
+    reloadlatestTimer = setInterval(loadLatestValues, 5000)
     $('#homepage').addClass('incognito')
     $('#logpage').addClass('incognito')
     $('#valuespage').removeClass('incognito')
@@ -89,6 +75,7 @@ function load_Everything(success_callback) {
     var options
     if (overView === undefined || overView.CurrentWindow === undefined || overView.CurrentWindow.SetStart === undefined) {
         options = {
+            /*  url: "http://localhost:49614/api/Everything?Rig=" + rig*/
             url: "https://roilapi.azurewebsites.net/api/Everything?Rig=" + rig
             , type: "GET"
         , }
@@ -123,7 +110,19 @@ function load_Everything(success_callback) {
 function load_Everything_callback(Overview) {
     load_valuesPage()
     load_logsPage()
-    reloadEverythingTimer = setInterval(load_Everything, 5000)
+}
+
+function loadLatestValues() {
+    options = {
+        url: "https://roilapi.azurewebsites.net/api/latestVals?table=" + rig + "&offset=15"
+        , type: "GET"
+    , }
+    $.ajax(options).success(function (response) {
+        var tempO = JSON.parse(response);
+        convertDates(tempO);
+        generate_coordinates(tempO);
+        overView.Latest = tempO
+    });
 }
 
 function ConvertingDatesANDGeneratingCoordinates(tempO) {

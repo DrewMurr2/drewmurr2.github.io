@@ -80,13 +80,13 @@ function load_chart() { // function to load chart  - called by documnet.ready
             , horizontalAlign: "right"
         }
         , axisY: {
-            minimum: overView.RealStartTime
-            , maximum: overView.RealEndTime
+            minimum: overView.RealEndTime
+            , maximum: overView.RealStartTime
             , labelFormatter: function (e) {
                 return ''
             }
             , tickLength: 0
-            , interval: (overView.RealEndTime - overView.RealStartTime) / 5
+            , interval: ((overView.RealEndTime * -1) - (overView.RealStartTime * -1)) / 5
             , labelWrap: true
             , /*labelMaxWidth: 80, */
         }
@@ -145,8 +145,6 @@ function setup_chart_options(t) { //function to put all the data in chart  - cal
     }
     return data;
 }
-
-
 $('#viewTimeAxis').change(function () {
     if ($(this).is(':checked')) {
         /*This if statement checks to see if the log covers more than 1 day*/
@@ -170,9 +168,6 @@ $('#viewTimeAxis').change(function () {
     }
     chart.render()
 })
-
-
-
 $('#viewDataSeries').change(function () {
     if ($(this).is(':checked')) {
         showDataLabels = true
@@ -190,8 +185,6 @@ $('#viewDataSeries').change(function () {
     });
     chart.render()
 })
-
-
 
 function HandleTrackClick(name, index, listElement) { //Build Modal on track click
     //if status was 0 / disabled
@@ -265,13 +258,13 @@ function adjust_chartjsHeight() { // function when window viewport is changed
     });
     chart.render();
 }
-$('#timeSpanModal').on('shown.bs.modal', function () { //event raised when modal is shown
+$('#timeSpanModal').on('shown.bs.modal', function () { //event raised when timespan modal is shown
+    changeLogObject(overView)
     load_timeSpan_slider(); //timeSpan slider
     load_timeSpan_slider2()
 });
 var windowInSeconds
 var spread
-var startTime
 var timeSliderPosition
 
 function load_timeSpan_slider() { // This created the Time Span slider bar
@@ -314,8 +307,8 @@ function load_timeSpan_slider() { // This created the Time Span slider bar
 function updateStartTime() {
     var windowInMili = windowInSeconds * 1000
     var range = spread - windowInMili
-    startTime = (overView.RealStartTime * -1) - Math.floor(range * timeSliderPosition + windowInMili)
-    var endtime = startTime + windowInMili
+    startTime = (overView.RealEndTime * -1) - Math.floor(range * timeSliderPosition + windowInMili)
+    endtime = startTime + windowInMili
     endtime *= -1
     startTime *= -1
     $('#locationLabel').html(chopDate(new Date(startTime)))

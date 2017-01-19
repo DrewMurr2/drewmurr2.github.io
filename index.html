@@ -72,7 +72,7 @@
                     </div>
                 </div>
                 <div id="historicLogOptions" style="float: right">
-                    <input type="checkbox" checked data-toggle="toggle" data-on="Play" data-off="Pause" data-onstyle="success">
+                    <input id="playToggle" type="checkbox" checked data-toggle="toggle" data-on="Play" data-off="Pause" data-onstyle="success">
                     <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#">Speed
         <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -83,127 +83,136 @@
                             <li onclick="changeSpeed(16)"><a href="#">16x</a></li>
                             <li onclick="changeSpeed(32)"><a href="#">32x</a></li>
                             <li onclick="changeSpeed(64)"><a href="#">64x</a></li>
+                            <li onclick="changeSpeed(128)"><a href="#">128x</a></li>
+                            <li onclick="changeSpeed(256)"><a href="#">256x</a></li>
+                            <li onclick="changeSpeed(512)"><a href="#">512x</a></li>
+                            <li onclick="changeSpeed(1000)"><a href="#">1000x</a></li>
+                            <li onclick="changeSpeed(2000)"><a href="#">2000x</a></li>
+                            <li onclick="changeSpeed(4000)"><a href="#">4000x</a></li>
+                            <li onclick="changeSpeed(8000)"><a href="#">8000x</a></li>
                         </ul>
                         <li id="speed">1x</li>
                     </li>
                 </div>
                 <!-- /.navbar-collapse -->
-            </div>
-            <!-- /.container-fluid -->
+                <!--    </div>-->
+                <!-- /.container-fluid -->
         </nav>
         <div id="chart_container">
             <div id="drewschart" style="height:auto; width:auto;">
                 <!-- xXxXxXx CHART xXxXxXx -->
             </div>
         </div>
-    </div>
-    <!-- Log Track Modal -->
-    <div class="modal fade" id="TrackPropertiesModal" role="dialog">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4> </div>
-                <div class="modal-body">
-                    <p>This is a large modal.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <!--</div>-->
+        <!-- Log Track Modal -->
+        <div class="modal fade" id="TrackPropertiesModal" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Modal Header</h4> </div>
+                    <div class="modal-body">
+                        <p>This is a large modal.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- View Options Modal -->
-    <div class="modal fade" id="viewOptionsModal" role="dialog">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">View Options</h4> </div>
-                <div class="modal-body">
-                    <div class="checkbox">
-                        <label>
-                            <input id="viewTimeAxis" type="checkbox" value="">Time Axis Labels</label>
+        <!-- View Options Modal -->
+        <div class="modal fade" id="viewOptionsModal" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">View Options</h4> </div>
+                    <div class="modal-body">
+                        <div class="checkbox">
+                            <label>
+                                <input id="viewTimeAxis" type="checkbox" value="">Time Axis Labels</label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input id="viewDataSeries" type="checkbox" value="">Data Series Labels</label>
+                        </div>
                     </div>
-                    <div class="checkbox">
-                        <label>
-                            <input id="viewDataSeries" type="checkbox" value="">Data Series Labels</label>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Live Modal -->
-    <div class="modal fade" id="LiveModal" role="dialog">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4> </div>
-                <div class="modal-body">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="">Option 1</label>
+        <!-- Live Modal -->
+        <div class="modal fade" id="LiveModal" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Modal Header</h4> </div>
+                    <div class="modal-body">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="">Option 1</label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="">Option 2</label>
+                        </div>
+                        <div class="checkbox disabled">
+                            <label>
+                                <input type="checkbox" value="" disabled>Option 3</label>
+                        </div>
                     </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="">Option 2</label>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
-                    <div class="checkbox disabled">
-                        <label>
-                            <input type="checkbox" value="" disabled>Option 3</label>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Time Span Modal -->
-    <div class="modal fade" id="timeSpanModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog custom-thin-right">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Time Span</h4> </div>
-                <div class="modal-body">
-                    <div id="time_span_bar" class="drewsThinSliderLeft">
-                        <div>Window</div>
-                        <div id="windowLabel">label</div>
-                        <div class="content"></div>
+        <!-- Time Span Modal -->
+        <div class="modal fade" id="timeSpanModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog custom-thin-right">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Time Span</h4> </div>
+                    <div class="modal-body">
+                        <div id="time_span_bar" class="drewsThinSliderLeft">
+                            <div>Window</div>
+                            <div id="windowLabel">label</div>
+                            <div class="content"></div>
+                        </div>
+                        <div id="time_span_bar2" class="drewsThinSliderRight">
+                            <div>Location</div>
+                            <div id="locationLabel">label</div>
+                            <div class="content"></div>
+                        </div>
                     </div>
-                    <div id="time_span_bar2" class="drewsThinSliderRight">
-                        <div>Location</div>
-                        <div id="locationLabel">label</div>
-                        <div class="content"></div>
+                    <div class="modal-footer">
+                        <button type="button" id="goTimespan" class="btn btn-default" data-dismiss="modal">Go</button>
+                        <button type="button" id="cancelTimespan" class="btn btn-default" data-dismiss="modal">Cancel</button>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Done</button>
-                </div>
+                <!-- /.modal-content -->
             </div>
-            <!-- /.modal-content -->
+            <!-- /.modal-dialog -->
         </div>
-        <!-- /.modal-dialog -->
-    </div>
-    <!-- /.modal -->
-    <!-- End log page -->
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="/page/javascript/roil/HomeJS.js"></script>
-    <script src="/page/javascript/noUiSlider/nouislider.min.js"></script>
-    <script src="/page/javascript/noUiSlider/wNumb.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="/page/javascript/bootstrap/bootstrap.min.js"></script>
-    <script src="/page/javascript/bootstrap/bootstrap-toggle.js"></script>
-    <script src="/page/javascript/CanvasJS/canvasjs.min.js"></script>
-    <script src="/page/javascript/roil/ValuesJS.js"></script>
-    <script src="/page/javascript/roil/Logs.js"></script>
-    <script src="/page/javascript/roil/LiveLogs.js"></script>
+        <!-- /.modal -->
+        <!-- End log page -->
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="/page/javascript/roil/HomeJS.js"></script>
+        <script src="/page/javascript/noUiSlider/nouislider.min.js"></script>
+        <script src="/page/javascript/noUiSlider/wNumb.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="/page/javascript/bootstrap/bootstrap.min.js"></script>
+        <script src="/page/javascript/bootstrap/bootstrap-toggle.js"></script>
+        <script src="/page/javascript/CanvasJS/canvasjs.min.js"></script>
+        <script src="/page/javascript/roil/ValuesJS.js"></script>
+        <script src="/page/javascript/roil/Logs.js"></script>
+        <script src="/page/javascript/roil/LiveLogs.js"></script>
+        <script src="/page/javascript/roil/HistoricLogs.js"></script>
 </body>
 
 </html>
