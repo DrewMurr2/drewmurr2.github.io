@@ -23,6 +23,9 @@ function goTimespanSelect() {
     retrieveCurrentWindowObject(startTime, endtime, function (CW) {
         overView.CurrentWindow = CW
         changeLogObject(overView.CurrentWindow)
+        callHistoricTimerTick //calls the next object for the backup array
+        historicCallTimer = setInterval(callHistoricTimerTick, 5000) //sets the timer to call those object
+        $('#speedTags').html(generateSpeedTags(Math.abs(endtime - startTime)))
     })
 };
 
@@ -68,13 +71,11 @@ $('#playToggle').change(function () {
     if ($('#playToggle').prop('checked') === true) {
         /*pause*/
         clearInterval(historicPlayTImer)
-        clearInterval(historicCallTimer)
     }
     else {
         /*play*/
         lastUpdatedTime = Date.now()
         historicPlayTImer = setInterval(playHistoricTimerTick, 100)
-        historicCallTimer = setInterval(callHistoricTimerTick, 5000)
     }
 })
 var updateCounter = 0
@@ -159,4 +160,30 @@ function LastTimeInArray() {
         }
     }
     return lastTime
+}
+
+function generateSpeedTags(windowSize) {
+    var speedTagsHTML = ''
+    var secondsInWindow = windowSize / 1000
+    var maxRetrieval = secondsInWindow * (1 / 5)
+    var onePercentOfMax = maxRetrieval / 100
+    speedTagsHTML += newSpeedTag(5 * onePercentOfMax)
+    speedTagsHTML += newSpeedTag(10 * onePercentOfMax)
+    speedTagsHTML += newSpeedTag(20 * onePercentOfMax)
+    speedTagsHTML += newSpeedTag(40 * onePercentOfMax)
+    speedTagsHTML += newSpeedTag(80 * onePercentOfMax)
+    return speedTagsHTML
+}
+
+function newSpeedTag(number) {
+    var prettyNumber = toStringWithSignificantDigits(number, 2)
+    var NewSpeedTag = '<li onclick="changeSpeed(' + prettyNumber + ')"><a href="#">' + prettyNumber + 'x</a></li>'
+    return NewSpeedTag
+}
+
+function toStringWithSignificantDigits(x, len) {
+    if (x == 0) return x.toFixed(len - 1); // makes little sense for 0
+    var numDigits = Math.ceil(Math.log10(Math.abs(x)));
+    var rounded = Math.round(x * Math.pow(10, len - numDigits)) * Math.pow(10, numDigits - len);
+    return rounded.toFixed(Math.max(len - numDigits, 0));
 }
