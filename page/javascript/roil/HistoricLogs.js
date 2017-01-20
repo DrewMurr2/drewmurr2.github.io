@@ -21,6 +21,7 @@ function goTimespanSelect() {
     arrayOfWindowObjects = []
     chart.render()
     retrieveCurrentWindowObject(startTime, endtime, function (CW) {
+        CW.newinterval = true
         overView.CurrentWindow = CW
         changeLogObject(overView.CurrentWindow)
         callHistoricTimerTick //calls the next object for the backup array

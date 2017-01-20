@@ -98,6 +98,7 @@ function load_Everything(success_callback) {
         var tempO = JSON.parse(response);
         ConvertingDatesANDGeneratingCoordinates(tempO)
         overView = tempO
+        overView.newinterval = true
         if (liveBool === true && chart !== undefined) {
             changeLogObject(overView.CurrentWindow)
         }

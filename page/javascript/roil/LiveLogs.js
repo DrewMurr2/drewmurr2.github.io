@@ -21,7 +21,10 @@ function changeLogObject(obj) {
     }
     chart.options.axisY.minimum = obj.RealEndTime
     chart.options.axisY.maximum = obj.RealStartTime
-    chart.options.axisY.interval = chooseInterval(obj)
+    if (obj.newinterval === true) {
+        chart.options.axisY.interval = chooseInterval(obj);
+        obj.newinterval = false
+    }
     chart.render()
 }
 

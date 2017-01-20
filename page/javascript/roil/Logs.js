@@ -259,6 +259,7 @@ function adjust_chartjsHeight() { // function when window viewport is changed
     chart.render();
 }
 $('#timeSpanModal').on('shown.bs.modal', function () { //event raised when timespan modal is shown
+    overView.newinterval = true
     changeLogObject(overView)
     load_timeSpan_slider(); //timeSpan slider
     load_timeSpan_slider2()
