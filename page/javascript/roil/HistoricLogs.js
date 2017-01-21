@@ -168,17 +168,17 @@ function generateSpeedTags(windowSize) {
     var secondsInWindow = windowSize / 1000
     var maxRetrieval = secondsInWindow * (1 / 5)
     var onePercentOfMax = maxRetrieval / 100
-    speedTagsHTML += newSpeedTag(5 * onePercentOfMax)
-    speedTagsHTML += newSpeedTag(10 * onePercentOfMax)
-    speedTagsHTML += newSpeedTag(20 * onePercentOfMax)
-    speedTagsHTML += newSpeedTag(40 * onePercentOfMax)
-    speedTagsHTML += newSpeedTag(80 * onePercentOfMax)
+    speedTagsHTML += newSpeedTag(5 * onePercentOfMax, '>')
+    speedTagsHTML += newSpeedTag(10 * onePercentOfMax, '>>')
+    speedTagsHTML += newSpeedTag(20 * onePercentOfMax, '>>>')
+    speedTagsHTML += newSpeedTag(40 * onePercentOfMax, '>>>>')
+    speedTagsHTML += newSpeedTag(80 * onePercentOfMax, '>>>>>')
     return speedTagsHTML
 }
 
-function newSpeedTag(number) {
+function newSpeedTag(number, symbol) {
     var prettyNumber = toStringWithSignificantDigits(number, 2)
-    var NewSpeedTag = '<li onclick="changeSpeed(' + prettyNumber + ')"><a href="#">' + prettyNumber + 'x</a></li>'
+    var NewSpeedTag = '<li onclick="changeSpeed(' + prettyNumber + ')"><a href="#">' + symbol + '</a></li>'
     return NewSpeedTag
 }
 
